@@ -21,6 +21,16 @@ def expense():
     if (request.method == "GET"):
 
         return render_template("expense.html")
+        
+    else:
+        
+        amount = request.form.get("amount")
+        category = request.form.get("category")
+        date = request.form.get("date")
+        
+        db.execute("INSERT INTO expenditure (amount, category, date) VALUES (:amount, :category, :date)", amount=amount, category=category, date=date)
+        
+        return redirect("/")
 
 
 @app.route("/signup", methods=["GET", "POST"])

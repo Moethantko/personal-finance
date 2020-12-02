@@ -18,22 +18,22 @@
         <form action="/expense" method="post">
             <div>
                 <label for="amount">Amount: </label>
-                <input type="number" placeholder="$$$$" id="amount" min="1" required>
+                <input type="number" placeholder="$$$$" id="amount" name="amount" min="1" required>
             </div>
 
             <div>
                 <label for="category">Category: </label>
-                <select id="category">
+                <select id="category" name="category">
                     <option value="food">Food</option>
                     <option value="entertainment">Entertainment</option>
-                    <option value="clothing">clothing</option>
+                    <option value="clothing">Clothing</option>
                     <option value="fees">Fees</option>
                 </select>
             </div>
 
             <div>
                 <label for="date">Date: </label>
-                <input type="date" id="date" required>
+                <input type="date" id="date" name="date" required>
             </div>
 
             <input type="submit" value="Add">
