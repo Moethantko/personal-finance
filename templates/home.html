@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+    <link rel="stylesheet" href="../static/styles.css">
+
+</head>
+<body>
+
+    <div id="header">
+        <a href="#" id="branding">Personal Finance</a>
+        <div class="floatright-group">
+            <a href="/expense">Add Expense</a>
+            <a href="#">Log Out</a>
+        </div>
+    </div>
+
+    <div id="transactions">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for expense in expenses %}
+                <tr>
+                    <td>${{expense["amount"]}}</td>
+                    <td>{{expense["category"]}}</td>
+                    <td>{{expense["date"]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+</body>
+</html>

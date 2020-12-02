@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Expense</title>
+
+    <link rel="stylesheet" href="../static/styles.css">
+
+</head>
+<body>
+
+    <div id="header">
+        <a href="#" id="branding">Personal Finance</a>
+    </div>
+
+    <div id="expense">
+
+        <form action="/expense" method="post">
+            <div>
+                <label for="amount">Amount: </label>
+                <input type="number" placeholder="$$$$" id="amount" min="1" required>
+            </div>
+
+            <div>
+                <label for="category">Category: </label>
+                <select id="category">
+                    <option value="food">Food</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="clothing">clothing</option>
+                    <option value="fees">Fees</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="date">Date: </label>
+                <input type="date" id="date" required>
+            </div>
+
+            <input type="submit" value="Add">
+        </form>
+
+    </div>
+
+</body>
+</html>

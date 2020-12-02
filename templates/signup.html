@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+
+    <link rel="stylesheet" href="../static/styles.css">
+
+</head>
+<body>
+
+    <div id="header">
+        <a href="#" id="branding">Personal Finance</a>
+    </div>
+
+    <div id="signup">
+
+        <form action="/signup" method="post">
+            <div>
+                <label for="username">Username: </label>
+                <input type="text" placeholder="Username" id="username" name="username" required>
+            </div>
+
+            <div>
+                <label for="password">Password: </label>
+                <input type="password" placeholder="******" id="password" name="password" required>
+            </div>
+
+            <input type="submit" value="Sign Up">
+        </form>
+
+    </div>
+
+</body>
+</html>
