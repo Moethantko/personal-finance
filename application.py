@@ -2,13 +2,23 @@ import os
 
 from cs50 import SQL
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
+from flask_session import Session
+from tempfile import mkdtemp
+from werkzeug.security import check_password_hash, generate_password_hash
 
+from helpers import login_required
 
 app = Flask(__name__)
+
+app.config["SESSION_FILE_DIR"] = mkdtemp()
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 db = SQL("sqlite:///personalFinance.db")
 
 @app.route("/", methods=["GET", "POST"])
+@login_required
 def index():
 
     expenses = db.execute("SELECT * FROM expenditure")
@@ -17,7 +27,7 @@ def index():
 
     for expense in expenses:
         expensesTotal = expensesTotal + float(expense["amount"])
-        
+
     balance = str(0.0 - expensesTotal)
     expensesTotal = str(expensesTotal)
 
@@ -25,6 +35,7 @@ def index():
 
 
 @app.route("/expense", methods=["GET", "POST"])
+@login_required
 def expense():
     if (request.method == "GET"):
 
@@ -54,9 +65,40 @@ def signup():
         username = request.form.get("username")
         password = request.form.get("password")
 
-
-        db.execute("INSERT INTO users (username, password) VALUES (:username, :password)", username=username, password=password)
+        db.execute("INSERT INTO users (username, hash) VALUES (:username, :hash)", username=username, hash=generate_password_hash(password))
 
         return redirect("/")
 
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+
+    if (request.method == "GET"):
+
+        return render_template("login.html")
+
+    else:
+
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        users = db.execute("SELECT * FROM users WHERE username = :username", username=username)
+
+        if len(users) != 1 or not check_password_hash(users[0]["hash"], password):
+
+            return render_template("login.html")
+
+        else:
+
+            session["user_id"] = users[0]["id"]
+
+            return redirect("/")
+
+
+@app.route("/logout")
+def logout():
+
+    session.clear()
+
+    return render_template("login.html")
 
