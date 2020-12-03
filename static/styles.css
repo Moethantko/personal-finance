@@ -54,14 +54,31 @@ input[type=submit] {
     color: #F6AE2D;
 }
 
+/* Sticker */
+#sticker-board {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0 30px 0;
+}
+
+.sticker {
+    background-color: #2F4858;
+    color: #F6AE2D;
+    padding: 20px 50px 20px 50px;
+    margin: 0 20px 0 20px;
+    border: 1px solid #2F4858;
+    border-radius: 7px;
+}
 
 /* Transactions */
 #transactions {
     margin: 30px 0 0 0;
+    display: flex;
+    justify-content: center;
 }
 
 #transactions table {
-    width: 100%;
+    width: 80%;
 }
 
 #transactions td {
