@@ -19,18 +19,18 @@
 
     <div id="sticker-board">
         <div class="sticker">
-            <h5>Budget</h5>
-            <h2>10000</h2>
+            <h5>Income</h5>
+            <h2>0</h2>
         </div>
 
         <div class="sticker">
             <h5>Expenses</h5>
-            <h2>5000</h2>
+            <h2>{{expensesTotal}}</h2>
         </div>
 
         <div class="sticker">
             <h5>Balance</h5>
-            <h2>5000</h2>
+            <h2>{{balance}}</h2>
         </div>
     </div>
 
@@ -42,6 +42,7 @@
                     <th>Amount</th>
                     <th>Category</th>
                     <th>Date</th>
+                    <th>Short Memo</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,6 +51,7 @@
                     <td>${{expense["amount"]}}</td>
                     <td>{{expense["category"]}}</td>
                     <td>{{expense["date"]}}</td>
+                    <td>{{expense["memo"]}}</td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -17,12 +17,12 @@
 
         <form action="/expense" method="post">
             <div>
-                <label for="amount">Amount: </label>
+                <label for="amount">Amount: </label><br>
                 <input type="number" placeholder="$$$$" id="amount" name="amount" min="1" required>
             </div>
 
             <div>
-                <label for="category">Category: </label>
+                <label for="category">Category: </label><br>
                 <select id="category" name="category">
                     <option value="food">Food</option>
                     <option value="entertainment">Entertainment</option>
@@ -30,13 +30,18 @@
                     <option value="fees">Fees</option>
                 </select>
             </div>
+            
+            <div>
+                <label for="memo">Short Memo: </label><br>
+                <textarea id="memo" name="memo" rows="4" cols="30">Type your memo for the day.</textarea>
+            </div>
 
             <div>
-                <label for="date">Date: </label>
+                <label for="date">Date: </label><br>
                 <input type="date" id="date" name="date" required>
             </div>
 
-            <input type="submit" value="Add">
+            <input type="submit" value="Add Expense">
         </form>
 
     </div>

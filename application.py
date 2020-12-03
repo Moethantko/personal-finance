@@ -13,23 +13,32 @@ def index():
 
     expenses = db.execute("SELECT * FROM expenditure")
 
-    return render_template("home.html", expenses=expenses)
-    
-    
+    expensesTotal = 0.0     #for stickers
+
+    for expense in expenses:
+        expensesTotal = expensesTotal + float(expense["amount"])
+        
+    balance = str(0.0 - expensesTotal)
+    expensesTotal = str(expensesTotal)
+
+    return render_template("home.html", expenses=expenses, expensesTotal=expensesTotal, balance=balance)
+
+
 @app.route("/expense", methods=["GET", "POST"])
 def expense():
     if (request.method == "GET"):
 
         return render_template("expense.html")
-        
+
     else:
-        
+
         amount = request.form.get("amount")
         category = request.form.get("category")
         date = request.form.get("date")
-        
-        db.execute("INSERT INTO expenditure (amount, category, date) VALUES (:amount, :category, :date)", amount=amount, category=category, date=date)
-        
+        memo = request.form.get("memo")
+
+        db.execute("INSERT INTO expenditure (amount, category, date, memo) VALUES (:amount, :category, :date, :memo)", amount=amount, category=category, date=date, memo=memo)
+
         return redirect("/")
 
 
