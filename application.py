@@ -21,7 +21,7 @@ db = SQL("sqlite:///personalFinance.db")
 @login_required
 def index():
 
-    expenses = db.execute("SELECT * FROM expenditure")
+    expenses = db.execute("SELECT * FROM expenditure WHERE user_id=:user_id", user_id=session["user_id"])
 
     expensesTotal = 0.0     #for stickers
 
@@ -31,7 +31,7 @@ def index():
     balance = str(0.0 - expensesTotal)
     expensesTotal = str(expensesTotal)
 
-    return render_template("home.html", expenses=expenses, expensesTotal=expensesTotal, balance=balance)
+    return render_template("index.html", expenses=expenses, expensesTotal=expensesTotal, balance=balance)
 
 
 @app.route("/expense", methods=["GET", "POST"])
@@ -48,7 +48,8 @@ def expense():
         date = request.form.get("date")
         memo = request.form.get("memo")
 
-        db.execute("INSERT INTO expenditure (amount, category, date, memo) VALUES (:amount, :category, :date, :memo)", amount=amount, category=category, date=date, memo=memo)
+        db.execute("INSERT INTO expenditure (amount, category, date, memo, user_id) VALUES (:amount, :category, :date, :memo, :user_id)",
+                    amount=amount, category=category, date=date, memo=memo, user_id=session["user_id"])
 
         return redirect("/")
 

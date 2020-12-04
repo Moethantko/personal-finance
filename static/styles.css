@@ -10,6 +10,11 @@ a {
     color: #F6AE2D;
 }
 
+a:hover, input[type="submit"]:hover {
+    color: #C6CA53;
+}
+
+
 /* header */
 
 #header {
